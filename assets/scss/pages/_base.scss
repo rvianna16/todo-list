@@ -1,0 +1,11 @@
+@use '../helpers/variables' as var;
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var.$bg-color;
+}
+
+.container {
+  max-width: min(90vw, 800px);
+  margin: auto;
+}
