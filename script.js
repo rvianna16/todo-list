@@ -1,7 +1,17 @@
+const Storage = {
+  setStorage() {
+    localStorage.setItem('todos', JSON.stringify(Todo.todos));
+  },
+
+  getStorage() {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+  },
+};
+
 const Todo = {
   input: document.getElementById('add'),
   ul: document.querySelector('.todo__list'),
-  todos: [],
+  todos: Storage.getStorage(),
   dragIndex: 0,
 
   getStartIndex() {
@@ -100,9 +110,11 @@ const Todo = {
     this.sortTodo();
     Filter.remainingItems();
     Filter.allFilter();
+
+    Storage.setStorage();
   },
 
-  addEventListener() {
+  addInputListener() {
     this.input.addEventListener('keypress', (e) => {
       if (e.charCode === 13) {
         e.preventDefault();
@@ -125,7 +137,7 @@ const Filter = {
   allButton: document.querySelector('[data-filter="all"]'),
   activeButton: document.querySelector('[data-filter="active"]'),
   doneButton: document.querySelector('[data-filter="done"]'),
-  span: document.getElementById('itens'),
+  span: document.getElementById('itemsCount'),
 
   remainingItems() {
     const items = document.querySelectorAll('li:not(.done)');
@@ -202,6 +214,6 @@ const Filter = {
   },
 };
 
-Todo.addEventListener();
+Todo.addInputListener();
 Todo.init();
 Filter.init();
