@@ -11,7 +11,9 @@
 ## :bulb: Todo List
 
 O projeto é uma aplicação web, onde é possível adicionar e organizar sua tarefas do dia a dia.
+<br>
 O intuito deste projeto foi rever conceitos que já havia aprendido e aprimorar ainda mais minhas habilidades no JavaScript.
+<br>
 Foi bastante interessante ver o funcionamento do 'Drag and Drop', algo que eu nunca tinha feito antes.
 
 ---
