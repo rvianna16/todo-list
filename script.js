@@ -1,39 +1,61 @@
-const todo = {
+const Todo = {
   input: document.getElementById('add'),
   ul: document.querySelector('.todo__list'),
   todos: [],
+  dragIndex: 0,
 
-  init() {
-    this.addTodo();
-    this.removeTodo();
-    this.checkTodo();
-    filter.remainingItems();
-    filter.allFilter();
+  getStartIndex() {
+    const startIndex = +this.getAttribute('data-index');
+    Todo.dragIndex = startIndex;
+  },
+  dragDrop() {
+    const dragStartIndex = Todo.dragIndex;
+    const dragEndIndex = +this.getAttribute('data-index');
+    const todos = Todo.todos;
+
+    todos.splice(dragEndIndex, 0, todos.splice(dragStartIndex, 1)[0]);
+
+    this.classList.remove('over');
+    Todo.reload();
   },
 
-  reload() {
-    this.clearTodo();
-    this.init();
+  dragEnter() {
+    this.classList.add('over');
   },
 
-  addTodo() {
-    this.todos.forEach((todo) => {
-      const statusClass = todo.status === 'do' ? '' : 'done';
-      const iconClass =
-        todo.status === 'do' ? 'far fa-circle' : 'fas fa-check-circle';
-      const html = `   
-        <li class="todo__item ${statusClass}">   
-          <i class="check ${iconClass}"></i>
-          <p>${todo.text}</p>
-          <i class="remove fas fa-minus-circle"></i>  
-        </li>    
-      `;
-      this.ul.innerHTML += html;
+  dragOver(e) {
+    e.preventDefault();
+  },
+
+  dragLeave() {
+    this.classList.remove('over');
+  },
+
+  sortTodo() {
+    const list = Todo.ul.querySelectorAll('li');
+    list.forEach((li) => {
+      li.addEventListener('dragstart', this.getStartIndex);
+      li.addEventListener('dragleave', this.dragLeave);
+      li.addEventListener('dragover', this.dragOver);
+      li.addEventListener('dragenter', this.dragEnter);
+      li.addEventListener('drop', this.dragDrop);
     });
   },
 
-  clearTodo() {
-    this.ul.innerHTML = '';
+  checkTodo() {
+    const checkBtn = document.querySelectorAll('.todo__item .check');
+
+    checkBtn.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        if (this.todos[index].status === 'do') {
+          this.todos[index].status = 'done';
+        } else {
+          this.todos[index].status = 'do';
+        }
+
+        this.reload();
+      });
+    });
   },
 
   removeTodo() {
@@ -46,19 +68,38 @@ const todo = {
     });
   },
 
-  checkTodo() {
-    const checkBtn = document.querySelectorAll('.todo__item');
-    checkBtn.forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-        if (this.todos[index].status === 'do') {
-          this.todos[index].status = 'done';
-        } else {
-          this.todos[index].status = 'do';
-        }
+  clearTodo() {
+    this.ul.innerHTML = '';
+  },
 
-        this.reload();
-      });
+  addTodo() {
+    this.todos.forEach((todo, index) => {
+      const statusClass = todo.status === 'do' ? '' : 'done';
+      const iconClass =
+        todo.status === 'do' ? 'far fa-circle' : 'fas fa-check-circle';
+      const html = `   
+        <li class="todo__item ${statusClass}" data-index="${index}" draggable="true">   
+          <i class="check ${iconClass}"></i>
+          <p>${todo.text}</p>
+          <i class="remove fas fa-minus-circle"></i>  
+        </li>    
+      `;
+      this.ul.innerHTML += html;
     });
+  },
+
+  reload() {
+    this.clearTodo();
+    this.init();
+  },
+
+  init() {
+    this.addTodo();
+    this.removeTodo();
+    this.checkTodo();
+    this.sortTodo();
+    Filter.remainingItems();
+    Filter.allFilter();
   },
 
   addEventListener() {
@@ -80,7 +121,7 @@ const todo = {
   },
 };
 
-const filter = {
+const Filter = {
   allButton: document.querySelector('[data-filter="all"]'),
   activeButton: document.querySelector('[data-filter="active"]'),
   doneButton: document.querySelector('[data-filter="done"]'),
@@ -90,7 +131,7 @@ const filter = {
     const items = document.querySelectorAll('li:not(.done)');
     const doneItems = document.querySelectorAll('li.done');
 
-    if (filter.doneButton.classList.contains('active')) {
+    if (Filter.doneButton.classList.contains('active')) {
       this.span.innerText = `${doneItems.length} itens finalizados`;
     } else if (items.length === 0) {
       this.span.innerText = 'Nenhum item ativo';
@@ -112,9 +153,9 @@ const filter = {
   },
 
   allFilter() {
-    filter.removeActive();
-    filter.allButton.classList.add('active');
-    filter.remainingItems();
+    Filter.removeActive();
+    Filter.allButton.classList.add('active');
+    Filter.remainingItems();
 
     const todos = document.querySelectorAll('.todo__item');
 
@@ -124,9 +165,9 @@ const filter = {
   },
 
   activeFilter() {
-    filter.removeActive();
-    filter.activeButton.classList.add('active');
-    filter.remainingItems();
+    Filter.removeActive();
+    Filter.activeButton.classList.add('active');
+    Filter.remainingItems();
 
     const todos = document.querySelectorAll('.todo__item');
 
@@ -140,9 +181,9 @@ const filter = {
   },
 
   doneFilter() {
-    filter.removeActive();
-    filter.doneButton.classList.add('active');
-    filter.remainingItems();
+    Filter.removeActive();
+    Filter.doneButton.classList.add('active');
+    Filter.remainingItems();
 
     const todos = document.querySelectorAll('.todo__item');
 
@@ -161,6 +202,6 @@ const filter = {
   },
 };
 
-todo.addEventListener();
-todo.init();
-filter.init();
+Todo.addEventListener();
+Todo.init();
+Filter.init();

@@ -71,9 +71,9 @@ section.todo .todo__filter button {
   margin-right: 20px;
 }
 section.todo .todo__filter button.active {
-  opacity: 1;
   color: #314492;
   font-weight: bold;
+  opacity: 1;
 }
 section.todo .todo__list {
   list-style: none;
@@ -90,19 +90,24 @@ section.todo .todo__list .todo__item {
 section.todo .todo__list .todo__item:first-child {
   padding-top: 0;
 }
+section.todo .todo__list .todo__item.over {
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0.6;
+}
 section.todo .todo__list .todo__item.done p {
   text-decoration: line-through;
   opacity: 0.3;
 }
-section.todo .todo__list .todo__item .check {
+section.todo .todo__list .todo__item i.check {
   color: #314492;
   font-size: 1.5rem;
   margin-right: 15px;
 }
 section.todo .todo__list .todo__item p {
   padding-right: 25px;
+  word-break: break-all;
 }
-section.todo .todo__list .todo__item .remove {
+section.todo .todo__list .todo__item i.remove {
   position: absolute;
   right: 0;
   color: #314492;
