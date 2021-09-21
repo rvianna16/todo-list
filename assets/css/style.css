@@ -58,15 +58,19 @@ section.todo {
   box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.1);
 }
 section.todo .todo__filter {
-  display: grid;
-  grid-template-columns: 70px 70px 70px;
+  display: flex;
   margin-bottom: 2rem;
 }
-section.todo .todo__filter p {
+section.todo .todo__filter button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  text-align: left;
   opacity: 0.6;
   cursor: pointer;
+  margin-right: 20px;
 }
-section.todo .todo__filter p.active {
+section.todo .todo__filter button.active {
   opacity: 1;
   color: #314492;
   font-weight: bold;
@@ -79,6 +83,7 @@ section.todo .todo__list .todo__item {
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   font-size: 1.2rem;
   padding: 1rem 0;
 }
@@ -89,9 +94,8 @@ section.todo .todo__list .todo__item.done p {
   text-decoration: line-through;
   opacity: 0.3;
 }
-section.todo .todo__list .todo__item .status {
+section.todo .todo__list .todo__item .check {
   color: #314492;
-  cursor: pointer;
   font-size: 1.5rem;
   margin-right: 15px;
 }
@@ -103,7 +107,6 @@ section.todo .todo__list .todo__item .remove {
   right: 0;
   color: #314492;
   font-size: 1.5rem;
-  cursor: pointer;
   opacity: 0;
 }
 section.todo .todo__list .todo__item:hover .remove {

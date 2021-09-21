@@ -9,13 +9,17 @@ section.todo {
   box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.1);
 
   .todo__filter {
-    display: grid;
-    grid-template-columns: 70px 70px 70px;
+    display: flex;
     margin-bottom: 2rem;
 
-    p {
+    button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      text-align: left;
       opacity: 0.6;
       cursor: pointer;
+      margin-right: 20px;
 
       &.active {
         opacity: 1;
@@ -33,6 +37,7 @@ section.todo {
       display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      cursor: pointer;
       font-size: 1.2rem;
       padding: 1rem 0;
 
@@ -47,9 +52,8 @@ section.todo {
         }
       }
 
-      .status {
+      .check {
         color: var.$primary-color;
-        cursor: pointer;
         font-size: 1.5rem;
         margin-right: 15px;
       }
@@ -63,7 +67,6 @@ section.todo {
         right: 0;
         color: var.$primary-color;
         font-size: 1.5rem;
-        cursor: pointer;
         opacity: 0;
       }
 

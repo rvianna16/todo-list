@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
-    <title>Lista de tarefas</title>
+    <title>Todo list</title>
   </head>
   <body>
     <header>
@@ -35,21 +35,17 @@
       </section>
       <section class="todo">
         <div class="todo__filter">
-          <p data-filter="all" class="active">Todos</p>
-          <p data-filter="active">Ativas</p>
-          <p data-filter="done">Finalizadas</p>
+          <button data-filter="all" class="active">Todos</button>
+          <button data-filter="active">Ativas</button>
+          <button data-filter="done">Finalizadas</button>
 
         </div>
         <ul class="todo__list">
-          <li class="todo__item done">
-            <i class="status fas fa-check-circle"></i>
-            <p>Terminar o projeto</p>
-            <i class="remove fas fa-minus-circle"></i>
-          </li>         
+                              
         </ul>
         
         <div class="todo__bottom">
-          <span>3 itens restantes</span>         
+          <span id="itens"></span>         
         </div>
         
       </section>
