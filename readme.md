@@ -10,7 +10,9 @@
 
 ## :bulb: Todo List
 
-O projeto dev.finances é uma aplicação web de controle financeiro, desenvolvido com as dicas do Mayk Brito, instrutor da @rocketseat.
+O projeto é uma aplicação web, onde é possível adicionar e organizar sua tarefas do dia a dia.
+O intuito deste projeto foi rever conceitos que já havia aprendido e aprimorar ainda mais minhas habilidades no JavaScript.
+Foi bastante interessante ver o funcionamento do 'Drag and Drop', algo que eu nunca tinha feito antes.
 
 ---
 
